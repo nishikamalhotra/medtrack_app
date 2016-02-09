@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+        android:text="Welcome to MedTrack"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/WelcomeMessage" />
+    <TextView
+        android:text="Already a Member?"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/memberText" />
+    <Button
+        android:id="@+id/MemberLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Log In"
+        android:layout_marginLeft="50.0dp"
+        android:layout_marginRight="50.0dp" />
+    <TextView
+        android:text="Not Yet a Member? Register Today!"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newRegisterText" />
+    <Button
+        android:id="@+id/NewRegister"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:layout_marginLeft="50.0dp"
+        android:layout_marginRight="50.0dp" />
+    <Button
+        android:id="@+id/Alarm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Alarm"
+        android:layout_marginLeft="50.0dp"
+        android:layout_marginRight="50.0dp" />
+</LinearLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <Button
+        android:id="@+id/PatientLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Patient Profile"
+        android:layout_marginLeft="50.0dp"
+        android:layout_marginRight="50.0dp" />
+    <Button
+        android:id="@+id/PhysicianLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Physician Profile"
+        android:layout_marginLeft="50.0dp"
+        android:layout_marginRight="50.0dp" />
+    <Button
+        android:id="@+id/PharmacyLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Pharmacy Profile"
+        android:layout_marginLeft="50.0dp"
+        android:layout_marginRight="50.0dp" />
+</LinearLayout>
