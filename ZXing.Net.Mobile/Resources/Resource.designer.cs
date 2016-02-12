@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("AWSSDK_XMOBILE.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("ZXing.Mobile.Resource", IsApplication=false)]
 
-namespace AWSSDK_XMOBILE
+namespace ZXing.Mobile
 {
 	
 	
@@ -40,8 +40,8 @@ namespace AWSSDK_XMOBILE
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040000
-			public static int contentFrame = 2130968576;
+			// aapt resource value: 0x7f030000
+			public static int contentFrame = 2130903040;
 			
 			static Id()
 			{
@@ -68,25 +68,6 @@ namespace AWSSDK_XMOBILE
 			}
 			
 			private Layout()
-			{
-			}
-		}
-		
-		public partial class String
-		{
-			
-			// aapt resource value: 0x7f030001
-			public static int ApplicationName = 2130903041;
-			
-			// aapt resource value: 0x7f030000
-			public static int Hello = 2130903040;
-			
-			static String()
-			{
-				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
-			}
-			
-			private String()
 			{
 			}
 		}

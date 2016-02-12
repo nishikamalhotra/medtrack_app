@@ -26,6 +26,9 @@ namespace MedTrack
 		
 		public static void UpdateIdValues()
 		{
+			global::AWSSDK_XMOBILE.Resource.Id.contentFrame = global::MedTrack.Resource.Id.contentFrame;
+			global::AWSSDK_XMOBILE.Resource.Layout.zxingscanneractivitylayout = global::MedTrack.Resource.Layout.zxingscanneractivitylayout;
+			global::AWSSDK_XMOBILE.Resource.Layout.zxingscannerfragmentlayout = global::MedTrack.Resource.Layout.zxingscannerfragmentlayout;
 			global::AWSSDK_XMOBILE.Resource.String.ApplicationName = global::MedTrack.Resource.String.ApplicationName;
 			global::AWSSDK_XMOBILE.Resource.String.Hello = global::MedTrack.Resource.String.Hello;
 			global::ZXing.Mobile.Resource.Id.contentFrame = global::MedTrack.Resource.Id.contentFrame;
