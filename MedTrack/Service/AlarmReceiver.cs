@@ -24,7 +24,7 @@ namespace MedTrack.Service
             var style = new NotificationCompat.BigTextStyle();
             style.BigText(message);
             var manager = NotificationManagerCompat.From(context);
-
+            var label = 0;
             var builder = new NotificationCompat.Builder(context)
                             .SetContentIntent(contentIntent)
                             .SetSmallIcon(Resource.Drawable.Icon)
