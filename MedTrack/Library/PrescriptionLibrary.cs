@@ -35,5 +35,13 @@ namespace MedTrack.Library
             prescription.PrescriptionID = id;
             _dynamoDBService.Store(prescription);
         }
+
+        public async Task<string> FindPrescriptionByCurrentDate(string date)
+        {
+            //string date = "2162016";
+            Task<string> medicineName = _dynamoDBService.FindPrescriptionForCurrentDate(date);
+            string med = await medicineName;
+            return med;
+        }
     }
 }

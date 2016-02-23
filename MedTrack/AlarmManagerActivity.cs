@@ -11,83 +11,54 @@ using Android.Views;
 using Android.Widget;
 using MedTrack.Service;
 using Java.Util;
+using MedTrack.Library;
+using System.Threading.Tasks;
+using MedTrack.Entity;
+using System.Text.RegularExpressions;
+using Java.Lang;
 
 namespace MedTrack
 {
     [Activity(Label = "AlarmManagerActivity")]
     public class AlarmManagerActivity : Activity
     {
-        private AlarmManagerBroadcastReceiver alarm;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.AlarmLayout);
             Context context = this.ApplicationContext;
-            Intent intent = new Intent(context, typeof(AlarmManagerBroadcastReceiver));
-            PendingIntent pi = PendingIntent.GetBroadcast(context, 0, intent, 0);
-            // Create your application here
-            alarm = new AlarmManagerBroadcastReceiver();
+            Intent intent = new Intent(context, typeof(AlarmReceiver));
+            PendingIntent pendingIntent_morning;
             Button alarmset = FindViewById<Button>(Resource.Id.AlarmSet);
-            alarmset.Click += delegate
-            {
-                AlarmManager manager = (AlarmManager)GetSystemService(Context.AlarmService);
-                int interval = 8000;
 
-                manager.SetInexactRepeating(AlarmType.RtcWakeup, SystemClock.CurrentThreadTimeMillis(), interval, pi);
-                Toast.MakeText(this, "Alarm Set", ToastLength.Long).Show();
-            };
-
-            Button alarmsetTime = FindViewById<Button>(Resource.Id.AlarmSetatTime);
-            alarmsetTime.Click += delegate
+            alarmset.Click += async delegate
             {
-                AlarmManager manager = (AlarmManager)GetSystemService(Context.AlarmService);
-                int interval = 1000 * 60;
+
+                AlarmService service = new AlarmService();               
+                string med = await service.getMedicine();       
+                string[] values = Regex.Split(med, "&");
+                Console.WriteLine(string.Format( "Medicine: {0}", med));
+
+                intent.PutExtra("MedicineName", values[0]);
+                intent.PutExtra("NumberofTimes", values[1].Trim());
+                intent.PutExtra("check", "true");
+                var numOfTime = values[1].Trim();
+
                 Locale loc = new Locale("en", "us");
+                // Create Pacific time zone with -8 hours offset:
+                Java.Util.TimeZone tz = new SimpleTimeZone(-28800000, "America/Los_Angeles");
 
-                Calendar calendar = Calendar.GetInstance(loc);
+                //morning alarm
+                Calendar cal_alarm_morning =  Calendar.GetInstance(tz, loc);
+                cal_alarm_morning.Set(CalendarField.HourOfDay, 09);
+                cal_alarm_morning.Set(CalendarField.Minute, 00);
+                cal_alarm_morning.Set(CalendarField.Second, 0);
 
-                calendar.Set(CalendarField.HourOfDay, 16);
-                calendar.Set(CalendarField.Minute, 00);
-                manager.SetRepeating(AlarmType.RtcWakeup, SystemClock.CurrentThreadTimeMillis(), interval, pi);
-            };
+                pendingIntent_morning = PendingIntent.GetBroadcast(context, 0, intent, 0);
+                AlarmManager manager = (AlarmManager)GetSystemService(Context.AlarmService);
+                manager.SetRepeating(AlarmType.RtcWakeup, cal_alarm_morning.TimeInMillis, Android.App.AlarmManager.IntervalDay, pendingIntent_morning);
+                Toast.MakeText(this, "Alarm Set", ToastLength.Long).Show();
+            };          
         }
-
-        //protected void setRepeatingAlarm(View view)
-        //{
-        //    Context context = this.ApplicationContext;
-        //    if (alarm != null)
-        //    {
-        //        alarm.SetAlarm(context);
-        //    }
-        //    else
-        //    {
-        //        Toast.MakeText(context, "Alarm is null", ToastLength.Long).Show();
-        //    }
-
-        //}
-        //Context context = this.ApplicationContext;
-
-        //AlarmManager am = (AlarmManager)context.GetSystemService(Context.AlarmService);
-        //Intent intent = new Intent(context, typeof(AlarmManagerBroadcastReceiver));
-
-        //intent.PutExtra("message", "Hi this is an alarm");
-        //PendingIntent pi = PendingIntent.GetBroadcast(context, 0, intent, 0);
-        ////After after 30 seconds
-        //long interval = 6000;
-        //am.SetRepeating(AlarmType.ElapsedRealtimeWakeup, SystemClock.CurrentThreadTimeMillis(), interval, pi);
-        //Toast.MakeText(this, "Alarm set in 5 seconds",ToastLength.Long).Show();
-
-            //if (alarm != null)
-            //{
-            //    alarm.SetAlarm(context);
-            //}
-            //else
-            //{
-            //    Toast.MakeText(context, "Alarm is null", ToastLength.Short).Show();
-            //}
-        
-
-
     }
 }

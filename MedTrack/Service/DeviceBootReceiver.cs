@@ -18,15 +18,16 @@ namespace MedTrack.Service
         {
             if (intent.Action.Equals("android.intent.action.BOOT_COMPLETED"))
             {
-                /* Setting the alarm here */
-                Intent alarmIntent = new Intent(context, typeof(AlarmManagerBroadcastReceiver));
-                PendingIntent pendingIntent = PendingIntent.GetBroadcast(context, 0, alarmIntent, 0);
+                ///* Setting the alarm here */
+                //Intent alarmIntent = new Intent(context, typeof(AlarmManagerBroadcastReceiver));
+                //PendingIntent pendingIntent = PendingIntent.GetBroadcast(context, 0, alarmIntent, 0);
 
-                AlarmManager manager = (AlarmManager)context.GetSystemService(Context.AlarmService);
-                int interval = 8000;
-                manager.SetInexactRepeating(AlarmType.RtcWakeup, SystemClock.CurrentThreadTimeMillis(), interval, pendingIntent);
+                //AlarmManager manager = (AlarmManager)context.GetSystemService(Context.AlarmService);
+                //int interval = 8000;
+                //manager.SetInexactRepeating(AlarmType.RtcWakeup, SystemClock.CurrentThreadTimeMillis(), interval, pendingIntent);
 
-                Toast.MakeText(context, "Alarm Set", ToastLength.Long).Show();
+                Toast.MakeText(context, "MedTrack has restarted", ToastLength.Short).Show();
+                //AlarmHelper.setAllAlarms(context);
             }
         }
     }

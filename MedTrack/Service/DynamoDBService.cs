@@ -37,11 +37,11 @@ namespace MedTrack.Service
             });
         }
 
-            /// <summary>
-            /// The Store method allows you to save a POCO to DynamoDb
-            /// </summary>
-            /// <typeparam name="T"></typeparam>
-            /// <param name="item"></param>
+        /// <summary>
+        /// The Store method allows you to save a POCO to DynamoDb
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item"></param>
         public void Store<T>(T item) where T : new()
         {
             DbContext.SaveAsync<T>(item);
@@ -81,11 +81,11 @@ namespace MedTrack.Service
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         async public Task<int> GetAllLocation<T>(string tableName) where T : class
-        {          
-            List<Document> allItems = await (GetAllItem(tableName)).GetRemainingAsync();     
+        {
+            List<Document> allItems = await (GetAllItem(tableName)).GetRemainingAsync();
             int newID = allItems.Count;
             return newID;
-         }
+        }
 
         async public Task<int> GetAllPatient<T>(string tableName) where T : class
         {
@@ -123,9 +123,9 @@ namespace MedTrack.Service
                 AttributesToGet = new List<string>() { "Barcode" },
             };
 
-          //  Primitive key = Medicine
+            //  Primitive key = Medicine
             Table tablename = Table.LoadTable(DynamoClient, table);
-          //  tablename.GetItemAsync(Primitive Medicine.MedicineID, Primitive sortKey, GetItemOperationConfig config)
+            //  tablename.GetItemAsync(Primitive Medicine.MedicineID, Primitive sortKey, GetItemOperationConfig config)
             ScanFilter scanFilter = new ScanFilter();
             scanFilter.AddCondition("Barcode", ScanOperator.Equal, barcode);
             ScanOperationConfig ScanConfig = new ScanOperationConfig()
@@ -156,5 +156,72 @@ namespace MedTrack.Service
             }
         }
 
+        public async Task<string> FindPrescriptionForCurrentDate(string date)
+        {
+            ScanFilter filter = new ScanFilter();
+            ScanOperator op = ScanOperator.Equal;
+            string attrName = "StartDate";
+            filter.AddCondition(attrName, op, date);
+
+            Table tablename = Table.LoadTable(DynamoClient, "Prescription");
+
+            List<Document> prescriptions = await (tablename.Scan(filter)).GetRemainingAsync();
+            int newID = prescriptions.Count;
+            string medicineName = "";
+            string numberOfTime = "";
+            string returnValue = "";
+            foreach (Document item in prescriptions)
+            {
+                foreach (string key in item.Keys)
+                {
+
+                    if (key == "Barcode")
+                    {
+                        DynamoDBEntry dbEntry = item[key];
+                        string val = dbEntry.ToString();
+                        long barcodeValue = Convert.ToInt64(val);
+                        //find medicine name 
+                        medicineName = await FindMedicineNameByBarcode(barcodeValue);
+                    } 
+
+                    if (key == "NumberOfTime")
+                    {
+                        DynamoDBEntry dbEntry = item[key];
+                        numberOfTime = dbEntry.ToString();
+                    }
+                    returnValue = medicineName + " & " + numberOfTime;    
+                                  
+                }
+            }
+            return returnValue;
+        }
+
+        public async Task<string> FindMedicineNameByBarcode(long barcode)
+        {
+            ScanFilter scanFilter = new ScanFilter();
+            ScanOperator ope = ScanOperator.Equal;
+            string att = "Barcode";
+            scanFilter.AddCondition(att, ope, barcode);
+
+            Table table = Table.LoadTable(DynamoClient, "Medicine");
+
+            List<Document> medicine = await (table.Scan(scanFilter)).GetRemainingAsync();
+            int id = medicine.Count;
+            string val = "";
+            foreach (Document item in medicine)
+            {
+                foreach (string key in item.Keys)
+                {
+
+                    if (key == "Name")
+                    {
+                        DynamoDBEntry dbEntry = item[key];
+                        val = dbEntry.ToString();
+                    }
+                    
+                }
+            }
+            return val;
+        }
     }
 }

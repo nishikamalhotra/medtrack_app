@@ -39,22 +39,8 @@ namespace MedTrack
             alarm.Click += delegate
             {
                 StartActivity(typeof(AlarmManagerActivity));
-            };
-            
-            //Intent alarmIntent = new Intent(Application.Context, typeof(AlarmReceiver));
-            //alarmIntent.PutExtra("message", "Hi this is an alarm");
-            //alarmIntent.PutExtra("title", "alarm");
-
-            //PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
-            //AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
-
-            ////TODO: For demo set after 5 seconds.
-            //alarmManager.SetRepeating(AlarmType.ElapsedRealtimeWakeup, SystemClock.CurrentThreadTimeMillis(), 5000, pendingIntent);
-
-
-
-            
-    }
+            };         
+        }
     }
 }
 

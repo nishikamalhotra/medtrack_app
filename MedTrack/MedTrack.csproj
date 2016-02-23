@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -33,8 +33,7 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <BundleAssemblies>False</BundleAssemblies>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-    <AndroidSupportedAbis>
-    </AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86,x86_64,arm64-v8a</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
     <Debugger>Xamarin</Debugger>
@@ -78,7 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddPrescriptionActivity.cs" />
+    <Compile Include="RepeatEveningAlarmActivity.cs" />
+    <Compile Include="RepeatAfternoonAlarmActivity.cs" />
     <Compile Include="AlarmManagerActivity.cs" />
+    <Compile Include="Entity\IntentObject.cs" />
     <Compile Include="Entity\Location.cs" />
     <Compile Include="Entity\Prescription.cs" />
     <Compile Include="Entity\Medicine.cs" />
@@ -101,13 +103,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AlarmManagerBroadcastReceiver.cs" />
     <Compile Include="Service\AlarmReceiver.cs" />
+    <Compile Include="Service\AlarmService.cs" />
     <Compile Include="Service\DeviceBootReceiver.cs" />
     <Compile Include="Service\DynamoDBService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="GettingStarted.Xamarin" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\PatientRegister.axml">
