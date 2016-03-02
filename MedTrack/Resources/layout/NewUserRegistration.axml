@@ -4,30 +4,30 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <TextView
-        android:text="Welcome back to MedTrack!"
+        android:text="Welcome back to MedTrack! One solution to all your medical needs."
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
-  <TextView
-        android:text="Please enter the details below to login"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
+        android:id="@+id/heading" />
    <TextView
-        android:text="Username"
+        android:text="Please select a username and password to register"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/usernameLabel" />
-   <EditText
+        android:id="@+id/heading" />
+    <TextView
+        android:text="Username *"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/usernamelabel1" />
+    <EditText
         android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/username" />
+        android:id="@+id/newusername" />
     <TextView
-        android:text="Password"
+        android:text="Password *"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,10 +36,10 @@
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password" />
+        android:id="@+id/newpassword" />
     <Button
-        android:text="Login"
+        android:text="Register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/loginButton" />
+        android:id="@+id/registerButton" />
 </LinearLayout>

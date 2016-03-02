@@ -35,11 +35,4 @@
         android:text="Register"
         android:layout_marginLeft="50.0dp"
         android:layout_marginRight="50.0dp" />
-    <Button
-        android:id="@+id/Alarm"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Alarm"
-        android:layout_marginLeft="50.0dp"
-        android:layout_marginRight="50.0dp" />
 </LinearLayout>

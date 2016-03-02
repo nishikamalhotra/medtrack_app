@@ -53,8 +53,8 @@ namespace MedTrack
             Java.Util.TimeZone tz = new SimpleTimeZone(-28800000, "America/Los_Angeles");
 
             Calendar cal_alarm_afternoon = Calendar.GetInstance(tz, loc);
-            cal_alarm_afternoon.Set(CalendarField.HourOfDay, 14);
-            cal_alarm_afternoon.Set(CalendarField.Minute, 10);
+            cal_alarm_afternoon.Set(CalendarField.HourOfDay, 16);
+            cal_alarm_afternoon.Set(CalendarField.Minute, 58);
             cal_alarm_afternoon.Set(CalendarField.Second, 0);
 
             pendingIntent_afternoon = PendingIntent.GetBroadcast(context, 0, intent, PendingIntentFlags.UpdateCurrent);

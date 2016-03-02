@@ -30,16 +30,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/addPrescriptionLabel" />
         <TextView
-            android:text="Start Date"
+            android:text="Please select a Prescription Start Date"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/startDateLabel" />
-        <EditText
-            android:inputType="date"
+        <DatePicker
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/startDate" />
+            android:id="@+id/datePicker1" />
         <TextView
             android:text="Number of Days"
             android:textAppearance="?android:attr/textAppearanceSmall"

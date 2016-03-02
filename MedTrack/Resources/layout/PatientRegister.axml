@@ -8,6 +8,12 @@
         android:layout_height="fill_parent"
         android:minWidth="25px"
         android:minHeight="25px">
+      <TextView
+            android:text="Please enter your details below to register as a Patient"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/welcome" />
         <TextView
             android:id="@+id/firstNameLabel"
             android:text="First Name"

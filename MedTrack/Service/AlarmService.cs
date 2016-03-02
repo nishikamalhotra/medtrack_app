@@ -26,7 +26,25 @@ namespace MedTrack.Service
             string month = currentDate.Month.ToString();
             string day = currentDate.Day.ToString();
             string year = currentDate.Year.ToString();
-            string date = month + day + year;
+
+            string m, d;
+            if (day.ToString().Length == 1)
+            {
+                d = "0" + day.ToString();
+            }
+            else
+            {
+                d = day.ToString();
+            }
+            if (month.ToString().Length == 1)
+            {
+                m = "0" + month.ToString();
+            }
+            else
+            {
+                m = month.ToString();
+            }
+            string date = m + d + year;
 
             PrescriptionLibrary lib = new PrescriptionLibrary();
             Task<string> medName = lib.FindPrescriptionByCurrentDate(date);

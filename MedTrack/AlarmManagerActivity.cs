@@ -50,8 +50,8 @@ namespace MedTrack
 
                 //morning alarm
                 Calendar cal_alarm_morning =  Calendar.GetInstance(tz, loc);
-                cal_alarm_morning.Set(CalendarField.HourOfDay, 09);
-                cal_alarm_morning.Set(CalendarField.Minute, 00);
+                cal_alarm_morning.Set(CalendarField.HourOfDay, 16);
+                cal_alarm_morning.Set(CalendarField.Minute, 55);
                 cal_alarm_morning.Set(CalendarField.Second, 0);
 
                 pendingIntent_morning = PendingIntent.GetBroadcast(context, 0, intent, 0);

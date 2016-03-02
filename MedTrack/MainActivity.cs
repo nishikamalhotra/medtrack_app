@@ -23,7 +23,6 @@ namespace MedTrack
             // and attach an event to it
             Button loginButton = FindViewById<Button>(Resource.Id.MemberLogin);
             Button newRegisterButton = FindViewById<Button>(Resource.Id.NewRegister);
-            Button alarm = FindViewById<Button>(Resource.Id.Alarm);
 
 
             loginButton.Click += delegate 
@@ -33,13 +32,8 @@ namespace MedTrack
 
             newRegisterButton.Click += delegate
             {
-                StartActivity(typeof(NewMemberRegisterActivity));
-            };
-
-            alarm.Click += delegate
-            {
-                StartActivity(typeof(AlarmManagerActivity));
-            };         
+                StartActivity(typeof(NewUserRegistration));
+            };        
         }
     }
 }

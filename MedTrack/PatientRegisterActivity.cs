@@ -12,6 +12,7 @@ using Android.Widget;
 using MedTrack.Entity;
 using MedTrack.Library;
 using Java.Lang;
+using System.Threading.Tasks;
 
 namespace MedTrack
 {
@@ -39,7 +40,7 @@ namespace MedTrack
             EditText disability = FindViewById<EditText>(Resource.Id.disabilityText);
             Button registerButton = FindViewById<Button>(Resource.Id.register);
 
-            registerButton.Click += delegate
+            registerButton.Click += async delegate
             {
                 Patient patient = new Patient();
                 patient.FirstName = firstName.Text.ToString();
@@ -66,17 +67,61 @@ namespace MedTrack
                 patient.PatientID = 1;
 
                 PatientLibrary patientLibrary = new PatientLibrary();
-                patientLibrary.AddPatient(patient);
+                try
+                {
+                    Task<int> patientId = patientLibrary.AddPatient(patient);
+                    int id = await patientId;
 
-                //Location location = new Location();
-                //location.AddressLine1 = address.Text.ToString();
-                //ToString();
-                //location.Zipcode = 1111;
-                //location.LocationID = 1;
+                    //set alert for executing the task
+                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                    // Create empty event handlers, we will override them manually instead of letting the builder handling the clicks.
+                    alert.SetPositiveButton("Okay", (EventHandler<DialogClickEventArgs>)null);
+                    // alert.SetNegativeButton("Cancel", (EventHandler<DialogClickEventArgs>)null);
+                    AlertDialog alertDialog = alert.Create();
+                    alertDialog.SetTitle("Registration Successfull");
+                    alertDialog.SetIcon(Android.Resource.Drawable.IcDialogAlert);
+                    alertDialog.SetMessage("Patient registered successfully. Your Patient ID is " + id.ToString());
+                    alertDialog.Show();
+                    // Get the buttons.
+                    var okButton = alertDialog.GetButton((int)DialogButtonType.Positive);
 
-                //var locationLibrary = new LocationLibrary();
 
-                //locationLibrary.AddLocation(location);
+                    // Assign our handlers.
+                    okButton.Click += (sender, args) =>
+                    {
+                        StartActivity(typeof(PatientLoginActivity));
+                    };
+
+                }
+                catch (Java.Lang.Exception e)
+                {
+                    //set alert for executing the task
+                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                    // Create empty event handlers, we will override them manually instead of letting the builder handling the clicks.
+                    alert.SetPositiveButton("Okay", (EventHandler<DialogClickEventArgs>)null);
+                    alert.SetNegativeButton("Cancel", (EventHandler<DialogClickEventArgs>)null);
+                    AlertDialog alertDialog = alert.Create();
+                    alertDialog.SetTitle("Registration Error!");
+                    alertDialog.SetIcon(Android.Resource.Drawable.IcDialogAlert);
+                    alertDialog.SetMessage("Patient not registered. Please try again.");
+                    alertDialog.Show();
+                    // Get the buttons.
+                    var okButton = alertDialog.GetButton((int)DialogButtonType.Positive);
+                    var cancelButton = alertDialog.GetButton((int)DialogButtonType.Negative);
+
+                    // Assign our handlers.
+                    okButton.Click += (sender, args) =>
+                    {
+                        StartActivity(typeof(PatientRegisterActivity));
+                    };
+                    cancelButton.Click += (sender, args) =>
+                    {
+                        StartActivity(typeof(NewMemberRegisterActivity));
+                    };
+                }
+
+
+
             };
 
         }

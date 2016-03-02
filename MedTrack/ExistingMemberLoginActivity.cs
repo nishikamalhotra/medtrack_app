@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using MedTrack.Service;
 
 namespace MedTrack
 {
@@ -24,15 +25,47 @@ namespace MedTrack
 
             // Get button clicks and user inputs from the layout resource,
             // and attach an event to it
-            EditText loginID = FindViewById<EditText>(Resource.Id.loginID);
+           
+            EditText username = FindViewById<EditText>(Resource.Id.username);
             EditText password = FindViewById<EditText>(Resource.Id.password);
             Button loginButton = FindViewById<Button>(Resource.Id.loginButton);
-           
-            loginButton.Click += delegate
+            bool result = false;
+            loginButton.Click += async delegate
             {
-                StartActivity(typeof(AddPrescriptionActivity));
-            };
+                LoginService loginService = new LoginService();
+                result = await loginService.loginAuthentication(username.Text.ToString(), password.Text.ToString());
+               
+                if (result)
+                {
+                    StartActivity(typeof(PatientLoginActivity));
+                }
+                else
+                {
+                    //set alert for executing the task
+                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                    // Create empty event handlers, we will override them manually instead of letting the builder handling the clicks.
+                    alert.SetPositiveButton("Okay", (EventHandler<DialogClickEventArgs>)null);
+                    alert.SetNegativeButton("Cancel", (EventHandler<DialogClickEventArgs>)null);
+                    AlertDialog alertDialog = alert.Create();
+                    alertDialog.SetTitle("Login Error!");
+                    alertDialog.SetIcon(Android.Resource.Drawable.IcDialogAlert);
+                    alertDialog.SetMessage("LoginId/ Username and Password do not match, please try again!");
+                    alertDialog.Show();
+                    // Get the buttons.
+                    var okButton = alertDialog.GetButton((int)DialogButtonType.Positive);
+                    var cancelButton = alertDialog.GetButton((int)DialogButtonType.Negative);
 
+                    // Assign our handlers.
+                    okButton.Click += (sender, args) =>
+                    {
+                        StartActivity(typeof(ExistingMemberLoginActivity));
+                    };
+                    cancelButton.Click += (sender, args) =>
+                    {
+                        StartActivity(typeof(MainActivity));
+                    };
+                }
+            };
         }
     }
 }

@@ -23,7 +23,7 @@ namespace MedTrack.Entity
 
         public long Barcode { get; set; }       
 
-        public DateTime StartDate { get; set; }
+        public string StartDate { get; set; }
 
         public int NumberOfDays { get; set; }
 

@@ -24,14 +24,14 @@ namespace MedTrack.Library
         }
 
 
-        public async void FindMedicineWithBarcode(long barcode)
-        {
-            string tablename = "Medicine";
-            _dynamoDBService.FindMedicineWithBarcode(barcode, tablename);
-            //int id = await idTask;
-            //location.LocationID = id;
-            //pharmacy.LocationID = id;
-            //_dynamoDBService.Store(location);
-        }
+        //public async void FindMedicineWithBarcode(long barcode)
+        //{
+        //    string tablename = "Medicine";
+        //    _dynamoDBService.FindMedicineWithBarcode(barcode, tablename);
+        //    //int id = await idTask;
+        //    //location.LocationID = id;
+        //    //pharmacy.LocationID = id;
+        //    //_dynamoDBService.Store(location);
+        //}
     }
 }

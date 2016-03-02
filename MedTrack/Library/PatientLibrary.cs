@@ -29,12 +29,13 @@ namespace MedTrack.Library
         ///  AddPatient will accept a Patient object and creates an Item on Amazon DynamoDB
         /// </summary>
         /// <param name="patient"></param>
-        public async void AddPatient(Patient patient)
+        public async Task<int> AddPatient(Patient patient)
         {
             Task<int> idTask = _dynamoDBService.GetAllPatient<Patient>("Patient");
             int id = await idTask;
             patient.PatientID = id;
             _dynamoDBService.Store(patient);
+            return id;
         }
 
 
@@ -46,22 +47,5 @@ namespace MedTrack.Library
         {
             _dynamoDBService.UpdateItem(patient);
         }
-
-        /// <summary>
-        /// GetALllPatients will perform a Table Scan operation to return all the Patients
-        /// </summary>
-        /// <returns></returns>
-        //public IEnumerable<Patient> GetAllPatients()
-        //{
-        //    String tablename = "Patient";
-        //    return _dynamoDBService.GetAll<Patient>(tablename);
-        //}
-
-        //public IEnumerable<Patient> SearchPatients(int patientID, string lastName)
-        //{
-        //    IEnumerable<Patient> filteredPatients = _dynamoDBService.DbContext.Query<Patient>(patientID, QueryOperator.Equal, lastName);
-
-        //    return filteredPatients;
-        //}
     }
 }
