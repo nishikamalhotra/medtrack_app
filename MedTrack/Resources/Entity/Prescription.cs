@@ -21,6 +21,8 @@ namespace MedTrack.Entity
         [DynamoDBRangeKey]
         public int PatientID { get; set; }
 
+        public string rxNumber { get; set; }
+
         public long Barcode { get; set; }       
 
         public string StartDate { get; set; }

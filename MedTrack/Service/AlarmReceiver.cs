@@ -9,7 +9,6 @@ using MedTrack.Entity;
 
 namespace MedTrack.Service
 {
-    //not using this class currently- not working
     [BroadcastReceiver]
     public class AlarmReceiver : BroadcastReceiver
     {

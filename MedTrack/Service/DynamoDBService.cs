@@ -27,7 +27,7 @@ namespace MedTrack.Service
         {
 
 
-            DynamoClient = new AmazonDynamoDBClient("", "", Amazon.RegionEndpoint.USEast1);
+            DynamoClient = new AmazonDynamoDBClient("AKIAJD7AWAWHQYYXED2A", "spPF+FpmLK7jExBVGhlf/HueW7yPdyTf6m+RlOSG", Amazon.RegionEndpoint.USEast1);
 
             DbContext = new DynamoDBContext(DynamoClient, new DynamoDBContextConfig
             {
@@ -115,46 +115,6 @@ namespace MedTrack.Service
             int newID = allItems.Count;
             return newID;
         }
-
-        //public async void FindMedicineWithBarcode(long barcode, string table)
-        //{
-        //    GetItemOperationConfig config = new GetItemOperationConfig()
-        //    {
-        //        AttributesToGet = new List<string>() { "Barcode" },
-        //    };
-
-        //    //  Primitive key = Medicine
-        //    Table tablename = Table.LoadTable(DynamoClient, table);
-        //    //  tablename.GetItemAsync(Primitive Medicine.MedicineID, Primitive sortKey, GetItemOperationConfig config)
-        //    ScanFilter scanFilter = new ScanFilter();
-        //    scanFilter.AddCondition("Barcode", ScanOperator.Equal, barcode);
-        //    ScanOperationConfig ScanConfig = new ScanOperationConfig()
-        //    {
-        //        AttributesToGet = new List<string> { "MedicineID", "Barcode" },
-        //        Filter = scanFilter
-        //    };
-        //    Search getMedicine = tablename.Scan(ScanConfig);
-        //    List<Document> result = await getMedicine.GetRemainingAsync();
-        //    foreach (Document item in result)
-        //    {
-        //        foreach (string key in item.Keys)
-        //        {
-        //            DynamoDBEntry dbEntry = item[key];
-        //            string val = dbEntry.ToString();
-        //            if (key.ToLower() == "Barcode")
-        //            {
-        //                List<string> barcodes = dbEntry.AsListOfString();
-        //                StringBuilder valueBuilder = new StringBuilder();
-        //                foreach (string code in barcodes)
-        //                {
-        //                    valueBuilder.Append(code).Append(", ");
-        //                }
-        //                val = valueBuilder.ToString();
-        //            }
-        //            Console.WriteLine(string.Format("Property: {0}, value: {1}", key, val));
-        //        }
-        //    }
-        //}
 
         public async Task<string> FindPrescriptionForCurrentDate(string date)
         {
@@ -255,5 +215,35 @@ namespace MedTrack.Service
             return val;
         }
 
+
+
+        public async Task<string> FindRxNumberByBarcode(long barcode, int patientID )
+        {
+            ScanFilter scanFilter = new ScanFilter();
+            ScanOperator ope = ScanOperator.Equal;
+            string att1 = "Barcode";
+            string att2 = "PatientID";
+            scanFilter.AddCondition(att1, ope, barcode);
+            scanFilter.AddCondition(att2, ope, patientID);
+
+            Table table = Table.LoadTable(DynamoClient, "Prescription");
+
+            List<Document> prescription = await (table.Scan(scanFilter)).GetRemainingAsync();
+            int id = prescription.Count;
+            string val="";
+            foreach (Document item in prescription)
+            {
+                foreach (string key in item.Keys)
+                {
+
+                    if (key == "rxNumber")
+                    {
+                        DynamoDBEntry dbEntry = item[key];
+                        val = dbEntry.ToString();                                            
+                    }
+                }
+            }
+            return val;
+        }
     }
 }

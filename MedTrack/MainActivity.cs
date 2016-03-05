@@ -24,7 +24,6 @@ namespace MedTrack
             Button loginButton = FindViewById<Button>(Resource.Id.MemberLogin);
             Button newRegisterButton = FindViewById<Button>(Resource.Id.NewRegister);
 
-
             loginButton.Click += delegate 
             {
                 StartActivity(typeof(ExistingMemberLoginActivity));

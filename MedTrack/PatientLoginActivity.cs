@@ -30,7 +30,7 @@ namespace MedTrack
             };
             refillPrescription.Click += delegate
             {
-                //refill walgreen
+                StartActivity(typeof(RefillScanActivity));
             };
         }
     }

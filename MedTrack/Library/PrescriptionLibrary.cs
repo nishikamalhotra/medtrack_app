@@ -43,5 +43,13 @@ namespace MedTrack.Library
             string med = await medicineName;
             return med;
         }
+
+        public async Task<string> FindRxByBarcode(long barcode, int patientID)
+        {
+            //string date = "2162016";
+            Task<string> rxNum = _dynamoDBService.FindRxNumberByBarcode(barcode, patientID);
+            string rxNumber = await rxNum;
+            return rxNumber;
+        }
     }
 }

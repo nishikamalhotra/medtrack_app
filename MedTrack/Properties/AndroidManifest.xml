@@ -10,11 +10,13 @@
 	<uses-permission android:name="android.permission.VIBRATE" />
 	<application android:label="MedTrack" android:icon="@drawable/Icon">
 		<receiver android:name=".AlarmReceiver" />
-		<!-- Will not be called unless the application explicitly enables it -->
-		<receiver android:name=".DeviceBootReceiver">
+		<activity android:name=".CompletedRefillActivity">
 			<intent-filter>
-				<action android:name="android.intent.action.BOOT_COMPLETED" />
+				<action android:name="android.intent.action.VIEW"></action>
+				<category android:name="android.intent.category.DEFAULT"></category>
+				<category android:name="android.intent.category.BROWSABLE"></category>
+				<data android:scheme="refillbyscan" android:host="handleControl"></data>
 			</intent-filter>
-		</receiver>
+		</activity>
 	</application>
 </manifest>

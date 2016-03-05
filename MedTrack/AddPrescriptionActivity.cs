@@ -35,9 +35,8 @@ namespace MedTrack
             SetContentView(Resource.Layout.Patient);
             // Get button clicks and user inputs from the layout resource,
             // and attach an event to it
-            EditText patientID = FindViewById<EditText>(Resource.Id.patientIdText);
-            //EditText startDate = FindViewById<EditText>(Resource.Id.startDate);
-            //DatePicker dp = FindViewById<DatePicker>(Resource.Id.datePicker1);
+            EditText patientID = FindViewById<EditText>(Resource.Id.patientIDNumber);
+            EditText rxNumber = FindViewById<EditText>(Resource.Id.rxNumber);
             EditText numberofDays = FindViewById<EditText>(Resource.Id.numOfDayText);
             EditText numberofTimes = FindViewById<EditText>(Resource.Id.numOfTimesText);
             EditText physician = FindViewById<EditText>(Resource.Id.physicianName);
@@ -62,6 +61,8 @@ namespace MedTrack
                 int patient, numOfTime, numOfDay;
                 int.TryParse(patientID.Text.ToString(), out patient);
                 prescription.PatientID = patient;
+                prescription.rxNumber = rxNumber.Text.ToString();
+
                 prescription.Barcode = barcode;
                 int.TryParse(numberofDays.Text.ToString(), out numOfDay);
                 prescription.NumberOfDays = numOfDay;

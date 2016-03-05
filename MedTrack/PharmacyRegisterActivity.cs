@@ -1,13 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using MedTrack.Entity;
 using MedTrack.Library;
@@ -38,7 +31,6 @@ namespace MedTrack
                 location.Zipcode = zip;
                 location.AddressLine1 = address.Text.ToString();
                 location.State = state.Text.ToString();
-              //  location.LocationID = 1;
                 LocationLibrary locationLib = new LocationLibrary();
                 locationLib.AddLocation(location, pharmacy);
 

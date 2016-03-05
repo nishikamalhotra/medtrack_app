@@ -29,6 +29,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/addPrescriptionLabel" />
+      <TextView
+            android:text="Prescription Number or Rx Number"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rxLabel" />
+        <EditText
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rxNumber" />
         <TextView
             android:text="Please select a Prescription Start Date"
             android:textAppearance="?android:attr/textAppearanceSmall"

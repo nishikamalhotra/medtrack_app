@@ -53,6 +53,10 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -81,8 +85,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddPrescriptionActivity.cs" />
+    <Compile Include="CompletedRefillActivity.cs" />
+    <Compile Include="LandingRequestObject.cs" />
     <Compile Include="NewUserRegistration.cs" />
     <Compile Include="PatientLoginActivity.cs" />
+    <Compile Include="RefillRequestObject.cs" />
+    <Compile Include="RefillScanActivity.cs" />
     <Compile Include="RepeatEveningAlarmActivity.cs" />
     <Compile Include="RepeatAfternoonAlarmActivity.cs" />
     <Compile Include="AlarmManagerActivity.cs" />
@@ -108,10 +116,12 @@
     <Compile Include="Resources\Entity\User.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseObject.cs" />
     <Compile Include="Service\AlarmReceiver.cs" />
     <Compile Include="Service\AlarmService.cs" />
     <Compile Include="Service\DynamoDBService.cs" />
     <Compile Include="Service\LoginService.cs" />
+    <Compile Include="Service\RequestHelper.cs" />
     <Compile Include="WebViewActivity.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +157,15 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\PatientLogin.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_web_view.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_completed_refill.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RefillScanLayout.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
