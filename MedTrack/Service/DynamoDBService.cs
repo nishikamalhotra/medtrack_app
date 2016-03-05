@@ -27,7 +27,7 @@ namespace MedTrack.Service
         {
 
 
-            DynamoClient = new AmazonDynamoDBClient("AKIAJD7AWAWHQYYXED2A", "spPF+FpmLK7jExBVGhlf/HueW7yPdyTf6m+RlOSG", Amazon.RegionEndpoint.USEast1);
+            DynamoClient = new AmazonDynamoDBClient("", "", Amazon.RegionEndpoint.USEast1);
 
             DbContext = new DynamoDBContext(DynamoClient, new DynamoDBContextConfig
             {

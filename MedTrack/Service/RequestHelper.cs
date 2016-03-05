@@ -18,7 +18,7 @@ namespace MedTrack.Service
         public LandingRequestObject PopulateLandingRequestObject()
         {
             LandingRequestObject obj = new LandingRequestObject();
-            obj.apiKey = "QmjNMCGWwezHKUAedDGXkDaGqOv3HBej";
+            obj.apiKey = "";
             obj.affId = "extest1";
             obj.transaction = "refillByScan";
             obj.act = "mweb5Url";
